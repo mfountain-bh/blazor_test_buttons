@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Diagnostics.CodeAnalysis
 
 <PageTitle>Index</PageTitle>
 
@@ -47,6 +48,30 @@
     </Tab>
 </Tabs>
 
+<Button Color="ButtonColor.Secondary" @onclick="ShowModal">Show test modal</Button>
+
+<Modal @ref="TestModal" Title="TestModal" IsScrollable="true" IsVerticallyCentered="true" Size="ModalSize.Large" ShowCloseButton="true" UseStaticBackdrop="true">
+    <BodyTemplate>
+        <div>
+            These buttons have @@onclick
+            <Button Type="ButtonType.Link" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Link</Button>
+            <Button Type="ButtonType.Submit" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Submit</Button>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Button</Button>
+            <Button Type="ButtonType.Reset" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Reset</Button>
+        </div>
+
+        <div>
+            These buttons do not
+            <Button Type="ButtonType.Link" Color="ButtonColor.Primary" Disabled=@disableTest>Test Link</Button>
+            <Button Type="ButtonType.Submit" Color="ButtonColor.Primary" Disabled=@disableTest>Test Submit</Button>
+            <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Disabled=@disableTest>Test Button</Button>
+            <Button Type="ButtonType.Reset" Color="ButtonColor.Primary" Disabled=@disableTest>Test Reset</Button>
+        </div>
+
+        <Button Color="ButtonColor.Danger" @onclick="() => SwapDisable()">Swap Disable</Button>
+    </BodyTemplate>
+</Modal>
+
 @code
 {
     bool disableTest = true;
@@ -59,5 +84,14 @@
     public void TestOnClick()
     {
         Console.WriteLine("clicked!");
+    }
+
+
+    [AllowNull]
+    Modal TestModal = new();
+
+    public async Task ShowModal()
+    {
+        await TestModal.ShowAsync();
     }
 }
