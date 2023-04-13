@@ -1,0 +1,63 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<Tabs>
+    <Tab Title="Tab1" IsActive="true">
+        <Content>
+            <div>
+                These buttons have @@onclick
+                <Button Type="ButtonType.Link" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Link</Button>
+                <Button Type="ButtonType.Submit" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Submit</Button>
+                <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Button</Button>
+                <Button Type="ButtonType.Reset" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Reset</Button>
+            </div>
+
+            <div>
+                These buttons do not
+                <Button Type="ButtonType.Link" Color="ButtonColor.Primary" Disabled=@disableTest>Test Link</Button>
+                <Button Type="ButtonType.Submit" Color="ButtonColor.Primary" Disabled=@disableTest>Test Submit</Button>
+                <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Disabled=@disableTest>Test Button</Button>
+                <Button Type="ButtonType.Reset" Color="ButtonColor.Primary" Disabled=@disableTest>Test Reset</Button>
+            </div>
+
+            <Button Color="ButtonColor.Danger" @onclick="() => SwapDisable()">Swap Disable</Button>
+        </Content>
+    </Tab>
+    <Tab Title="Tab2">
+        <Content>
+            <div>
+                These buttons have @@onclick
+                <Button Type="ButtonType.Link" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Link</Button>
+                <Button Type="ButtonType.Submit" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Submit</Button>
+                <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Button</Button>
+                <Button Type="ButtonType.Reset" Color="ButtonColor.Primary" Disabled=@disableTest @onclick="TestOnClick">Test Reset</Button>
+            </div>
+
+            <div>
+                These buttons do not
+                <Button Type="ButtonType.Link" Color="ButtonColor.Primary" Disabled=@disableTest>Test Link</Button>
+                <Button Type="ButtonType.Submit" Color="ButtonColor.Primary" Disabled=@disableTest>Test Submit</Button>
+                <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Disabled=@disableTest>Test Button</Button>
+                <Button Type="ButtonType.Reset" Color="ButtonColor.Primary" Disabled=@disableTest>Test Reset</Button>
+            </div>
+
+            <Button Color="ButtonColor.Danger" @onclick="() => SwapDisable()">Swap Disable</Button>
+        </Content>
+    </Tab>
+</Tabs>
+
+@code
+{
+    bool disableTest = true;
+
+    public void SwapDisable()
+    {
+        disableTest = !disableTest;
+    }
+
+    public void TestOnClick()
+    {
+        Console.WriteLine("clicked!");
+    }
+}
